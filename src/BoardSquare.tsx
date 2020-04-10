@@ -35,6 +35,7 @@ export default function BoardSquare({
 
   //
   // the drop hook 🎣
+  // turns *this* component into a drop target
   //
   // first item: properties returned from the 'collector'
   // second item: the ref function to attach to the drop DOM element
@@ -56,8 +57,41 @@ export default function BoardSquare({
     },
     // whether we can drop
     canDrop: () => canMoveKnight(x, y),
-    // what to do when the drop happens
-    drop: () => moveKnight(x, y),
+    // called when the item is hovering over this drop target
+    hover: (item: any, monitor: DropTargetMonitor) => {
+      console.log(`> hovering on [${x}, ${y}]`);
+    },
+    // called when the item is dropped on this drop target
+    drop: (item: any, monitor: DropTargetMonitor) => {
+      console.log(`> dropped on [${x}, ${y}]`);
+      console.log(`> monitor stats: `);
+      console.log(
+        `  - getInitialClientOffset() = ${JSON.stringify(
+          monitor.getInitialClientOffset()
+        )}`
+      );
+      console.log(
+        `  - getInitialSourceClientOffset() = ${JSON.stringify(
+          monitor.getInitialClientOffset()
+        )}`
+      );
+      console.log(
+        `  - getClientOffset() = ${JSON.stringify(
+          monitor.getInitialClientOffset()
+        )}`
+      );
+      console.log(
+        `  - getDifferenceFromInitialOffset() = ${JSON.stringify(
+          monitor.getInitialClientOffset()
+        )}`
+      );
+      console.log(
+        `  - getSourceClientOffset() = ${JSON.stringify(
+          monitor.getInitialClientOffset()
+        )}`
+      );
+      moveKnight(x, y);
+    },
   });
 
   return (
