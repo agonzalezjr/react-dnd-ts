@@ -1,12 +1,19 @@
 import React from "react";
 import Square from "./Square";
 import Knight from "./Knight";
+import { Position, moveKnight, canMoveKnight } from "./Game";
 
 interface BoardProps {
-  knightPosition: Array<number>;
+  knightPosition: Position;
 }
 
 const squaresSize = 3;
+
+function handleSquareClick(toX: number, toY: number) {
+  if (canMoveKnight(toX, toY)) {
+    moveKnight(toX, toY);
+  }
+}
 
 function renderSquare(i: number, [knightX, knightY]: number[]) {
   const x = i % 8;
@@ -18,6 +25,9 @@ function renderSquare(i: number, [knightX, knightY]: number[]) {
   return (
     <div
       key={i}
+      onClick={() => {
+        handleSquareClick(x, y);
+      }}
       style={{ width: `${squaresSize}rem`, height: `${squaresSize}rem` }}
     >
       <Square black={black}>{piece}</Square>
