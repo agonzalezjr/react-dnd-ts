@@ -1,10 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import React from "react";
 import ReactDOM from "react-dom";
-import Board from "./Board";
-import { observe, Position } from "./Game";
+
+// chess stuff
+import Board from "./chess/Board";
+import { observe, Position } from "./chess/Game";
 
 const root = document.getElementById("root");
 
-observe((knightPosition: Position) =>
-  ReactDOM.render(<Board knightPosition={knightPosition} />, root)
-);
+// enable for chess mode
+// observe((knightPosition: Position) =>
+//   ReactDOM.render(<Board knightPosition={knightPosition} />, root)
+// );
+
+ReactDOM.render(<span>foo</span>, root);
