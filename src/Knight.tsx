@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 
 import React from "react";
-import { useDrag } from "react-dnd";
+import { useDrag, DragSourceMonitor } from "react-dnd";
 import { ItemTypes } from "./Constants";
 
 export default function Knight() {
@@ -18,9 +18,14 @@ export default function Knight() {
     // 'collector' called as the dragging happens and provides
     // properties for the dragged component obtained from the
     // passed 'monitor'
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
-    }),
+    collect: (monitor: DragSourceMonitor) => {
+      console.log(
+        `>>> drag source monitor - item = ${JSON.stringify(monitor.getItem())}`
+      );
+      return {
+        isDragging: !!monitor.isDragging(),
+      };
+    },
   });
 
   return (
