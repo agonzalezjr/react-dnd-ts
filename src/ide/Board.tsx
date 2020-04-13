@@ -28,6 +28,7 @@ export default function Board() {
       if (!monitor.didDrop() && item.id === -1) {
         dispatch({
           type: "ADD_ITEM",
+          id: item.id,
           itemType: monitor.getItemType(),
         });
       }
