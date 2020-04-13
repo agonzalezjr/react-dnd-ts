@@ -19,15 +19,18 @@ export default function Board() {
     accept: [ItemTypes.Widget, ItemTypes.Group],
     collect: (monitor: DropTargetMonitor) => {
       return {
-        isOver: !!monitor.isOver(),
+        isOver: !!monitor.isOver({ shallow: true }),
       };
     },
     // called when the item is dropped on this drop target
     drop: (item: any, monitor: DropTargetMonitor) => {
-      dispatch({
-        type: "ADD_ITEM",
-        itemType: monitor.getItemType(),
-      });
+      // this is true if something else already processed the drop
+      if (!monitor.didDrop() && item.id === -1) {
+        dispatch({
+          type: "ADD_ITEM",
+          itemType: monitor.getItemType(),
+        });
+      }
     },
   });
 
