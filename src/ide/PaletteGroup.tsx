@@ -6,6 +6,8 @@ import { ItemTypes } from "./DndConstants";
 export default function PaletteGroup() {
   const [{ isDragging }, drag] = useDrag({
     item: {
+      // -1 => it's a new widget
+      id: -1,
       type: ItemTypes.Group,
     },
     collect: (monitor: DragSourceMonitor) => {

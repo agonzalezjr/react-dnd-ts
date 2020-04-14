@@ -17,7 +17,7 @@ interface WidgetProps {
 export enum DropPosition {
   Before = "Before",
   After = "After",
-  // Inside, -> TODO for groups
+  Inside = "Inside",
 }
 
 const getDropPosition = (
@@ -131,20 +131,32 @@ export default function Widget({ id }: WidgetProps) {
       item
       xs={3}
       style={{
-        border: "black dashed",
+        border: "black dashed thin",
         backgroundColor: "lightBlue",
         height: "50px",
         textAlign: "center",
         cursor: "move",
-        opacity: isOver ? 0.75 : 1,
+        opacity: isDragging ? 0.15 : isOver ? 0.85 : 1,
         borderRight:
-          isOver && dropPosition === DropPosition.After
-            ? "red solid"
-            : "black dashed",
+          isOver &&
+          (dropPosition === DropPosition.After ||
+            dropPosition === DropPosition.Inside)
+            ? "red solid thick"
+            : "black dashed thin",
         borderLeft:
-          isOver && dropPosition === DropPosition.Before
-            ? "red solid"
-            : "black dashed",
+          isOver &&
+          (dropPosition === DropPosition.Before ||
+            dropPosition === DropPosition.Inside)
+            ? "red solid thick"
+            : "black dashed thin",
+        borderTop:
+          isOver && dropPosition === DropPosition.Inside
+            ? "red solid thick"
+            : "black dashed thin",
+        borderBottom:
+          isOver && dropPosition === DropPosition.Inside
+            ? "red solid thick"
+            : "black dashed thin",
       }}
     >
       <div>{`Widget ${id}`}</div>
