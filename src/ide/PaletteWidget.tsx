@@ -24,15 +24,14 @@ export default function PaletteWidget() {
         textAlign: "center",
         height: "40px",
         width: "100px",
-        backgroundColor: "lightblue",
+        // backgroundColor: "lightblue",
         opacity: isDragging ? 0.5 : 1,
         cursor: "move",
       }}
     >
       <div
         style={{
-          borderStyle: "dashed",
-          borderColor: "black",
+          border: "dashed black thin",
           height: "34px",
           opacity: isDragging ? 0.5 : 1,
         }}

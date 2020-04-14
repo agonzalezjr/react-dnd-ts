@@ -42,7 +42,7 @@ export default function Board() {
       style={{
         borderColor: "black",
         borderStyle: "solid",
-        backgroundColor: "lightGreen",
+        // backgroundColor: "lightGreen",
         opacity: isOver ? 0.5 : 1,
       }}
     >

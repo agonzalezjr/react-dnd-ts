@@ -56,14 +56,14 @@ export default function Widget({ id }: WidgetProps) {
     accept: [ItemTypes.Widget, ItemTypes.Group],
 
     collect: (monitor: DropTargetMonitor) => {
-      console.log(`collecting ...`);
+      // console.log(`collecting ...`);
 
       return {
         isOver: !!monitor.isOver({ shallow: true }) && monitor.canDrop(),
       };
     },
     hover: (item: any, monitor: DropTargetMonitor) => {
-      console.log(`hovering ...`);
+      // console.log(`hovering ...`);
 
       // collect doesn't get called all the time, so we have to use
       // this hook callback to keep the drop position updated
@@ -132,7 +132,7 @@ export default function Widget({ id }: WidgetProps) {
       xs={3}
       style={{
         border: "black dashed thin",
-        backgroundColor: "lightBlue",
+        // backgroundColor: "lightBlue",
         height: "50px",
         textAlign: "center",
         cursor: "move",

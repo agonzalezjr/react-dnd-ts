@@ -70,14 +70,14 @@ export default function Group({ id }: GroupProps) {
     accept: [ItemTypes.Widget, ItemTypes.Group],
 
     collect: (monitor: DropTargetMonitor) => {
-      console.log(`collecting ...`);
+      // console.log(`collecting ...`);
 
       return {
         isOver: !!monitor.isOver({ shallow: true }) && monitor.canDrop(),
       };
     },
     hover: (item: any, monitor: DropTargetMonitor) => {
-      console.log(`hovering ...`);
+      // console.log(`hovering ...`);
 
       // collect doesn't get called all the time, so we have to use
       // this hook callback to keep the drop position updated
@@ -130,7 +130,7 @@ export default function Group({ id }: GroupProps) {
       xs={12}
       style={{
         border: "black dashed thin",
-        backgroundColor: "pink",
+        // backgroundColor: "pink",
         height: "50px",
         textAlign: "center",
         cursor: "move",
