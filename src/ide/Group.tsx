@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 
 import { Grid } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import { DropPosition } from "./Widget";
+import { useDispatch, useSelector } from "react-redux";
+import Widget, { DropPosition } from "./Widget";
 import {
   useDrop,
   DropTargetMonitor,
@@ -10,6 +10,7 @@ import {
   DragSourceMonitor,
 } from "react-dnd";
 import { ItemTypes } from "./DndConstants";
+import { ReduxState } from "../redux/reducer";
 
 interface GroupProps {
   id: number;
@@ -55,6 +56,10 @@ const getDropPosition = (
 };
 
 export default function Group({ id }: GroupProps) {
+  const widgets = useSelector(
+    (state: ReduxState) =>
+      state.widgets.find((widget) => widget.id === id)?.widgets
+  );
   const dispatch = useDispatch();
 
   const ref = useRef<HTMLDivElement>(null);
@@ -153,6 +158,14 @@ export default function Group({ id }: GroupProps) {
       }}
     >
       <div>{`Group ${id}`}</div>
+      {widgets &&
+        widgets.map((widget) => {
+          return widget.type === ItemTypes.Widget ? (
+            <Widget key={widget.id} id={widget.id} />
+          ) : (
+            <Group key={widget.id} id={widget.id} />
+          );
+        })}
     </Grid>
   );
 }

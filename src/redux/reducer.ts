@@ -4,6 +4,8 @@ import { DropPosition } from "../ide/Widget";
 interface Widget {
   type: ItemTypes;
   id: number;
+  // for a group
+  widgets?: Widget[];
 }
 
 export interface ReduxState {
@@ -19,6 +21,7 @@ const initialState: ReduxState = {
     {
       type: ItemTypes.Group,
       id: 1,
+      widgets: [],
     },
   ],
 };
@@ -58,6 +61,14 @@ export default function reducer(
           type: action.itemType,
           id: action.id,
         });
+      } else if (action.dropPosition === DropPosition.Inside) {
+        const innerWidgets = newWidgets[pos].widgets;
+        if (innerWidgets) {
+          innerWidgets.push({
+            type: action.itemType,
+            id: action.id,
+          });
+        }
       } else {
         const splicePos =
           action.dropPosition === DropPosition.Before ? pos : pos + 1;
